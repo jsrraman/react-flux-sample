@@ -3,8 +3,10 @@
 window.$ = window.jQuery = require('jquery');
 
 var React = require('react');
-var Home = require('./components/homePage');
-var About = require('./components/aboutPage');
+var HomePage = require('./components/homePage');
+var AboutPage = require('./components/aboutPage');
+var Header = require('./components/common/header');
+var AuthorPage = require('./components/authorPage');
 
 var App = React.createClass({
 	render: function() {
@@ -12,18 +14,24 @@ var App = React.createClass({
 
 		switch(this.props.route) {
 			case 'about': {
-				Child = About;
+				Child = AboutPage;
+				break;
+			}
+
+			case 'authors': {
+				Child = AuthorPage;
 				break;
 			}
 
 			default: {
-				Child = Home;
+				Child = HomePage;
 				break;
 			}
 		}
 
 		return (
 			<div>
+				<Header/>
 				<Child/>
 			</div>
 			);
