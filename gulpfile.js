@@ -9,6 +9,7 @@ var reactify = require('reactify'); // Transforms React JSX
 var source = require('vinyl-source-stream'); // Use conventional text streams with Gulp
 var concat = require('gulp-concat'); // Concatenates files
 var lint = require('gulp-eslint'); // Lints the JS, JSX files
+var sass = require('gulp-sass'); // Converts sass to css
 
 var config = {
 	devBaseUrl: 'http://localhost',
@@ -19,7 +20,12 @@ var config = {
 		images: './src/images/*',
 		css: [
 			'node_modules/bootstrap/dist/css/bootstrap.min.css',
-			'node_modules/bootstrap/dist/css/bootstrap-theme.min.css'
+			'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+			'./src/temp/*.css'
+		],
+		temp: './src/temp',
+		sass: [
+			'node_modules/toastr/toastr.scss'
 		],
 		mainJs: './src/main.js',
 		dist: './dist'
@@ -64,6 +70,12 @@ gulp.task('css', function() {
 		.pipe(gulp.dest(config.paths.dist + '/css'))
 });
 
+gulp.task('sass', function() {
+	gulp.src(config.paths.sass)
+		.pipe(sass().on('error', sass.logError))
+		.pipe(gulp.dest(config.paths.temp))
+});
+
 gulp.task('images', function() {
 	gulp.src(config.paths.images)
 		.pipe(gulp.dest(config.paths.dist + '/images'))
@@ -81,4 +93,4 @@ gulp.task('watch', function() {
 	gulp.watch(config.paths.js, ['js', 'lint']);
 });
 
-gulp.task('default', ['html', 'js', 'css', 'images', 'lint', 'open', 'watch']);
+gulp.task('default', ['html', 'js', 'sass', 'css', 'images', 'lint', 'open', 'watch']);

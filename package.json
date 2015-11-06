@@ -20,9 +20,11 @@
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
     "react": "^0.13.3",
-    "react-router": "^0.13.3"
+    "react-router": "^0.13.3",
+    "toastr": "^2.1.2"
   },
   "devDependencies": {
-    "gulp-debug": "^2.1.2"
+    "gulp-debug": "^2.1.2",
+    "gulp-sass": "^2.1.0"
   }
 }
