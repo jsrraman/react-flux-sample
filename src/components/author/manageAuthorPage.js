@@ -3,7 +3,8 @@
 var React = require("react");
 var Router = require("react-router");
 var AuthorForm = require("./authorForm");
-var AuthorApi = require("../../api/authorApi");
+var AuthorActions = require("../../actions/AuthorActions");
+var AuthorStore = require("../../stores/AuthorStore");
 var toastr = require("toastr");
 
 // Note:
@@ -41,6 +42,15 @@ var ManageAuthorPage = React.createClass({
             errors: {},
             dirty: false
         };
+    },
+
+    // Calling the setState in this component life cycle method will not cause a render
+    componentWillMount: function() {
+        var authorId = this.props.params.id; // from the path '/author:id'
+
+        if (authorId) {
+            this.setState({author: AuthorStore.getAuthorById(authorId)});
+        }
     },
 
     setAuthorState: function(event) {
@@ -83,7 +93,7 @@ var ManageAuthorPage = React.createClass({
             return;
         }
 
-        AuthorApi.saveAuthor(this.state.author);
+        AuthorActions.createAuthor(this.state.author);
 
         this.setState({dirty:false});
 
