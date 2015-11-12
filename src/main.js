@@ -3,6 +3,7 @@
 var React = require('react');
 var Router = require('react-router');
 var routes = require('./routes');
+var InitializeActions = require('./actions/initializeActions');
 
 // Note: Router.HistoryLocation will give you clean URLs (without # in the url path) but
 // for this to work correctly we need to configure the server to support clean URLs i.e
@@ -15,6 +16,8 @@ var routes = require('./routes');
 //Router.run(routes, Router.HistoryLocation, function (Handler) {
 //    React.render(<Handler/>, document.getElementById('app'));
 //});
+
+InitializeActions.initApp();
 
 Router.run(routes, function (Handler) {
     React.render(<Handler/>, document.getElementById('app'));
