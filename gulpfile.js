@@ -80,7 +80,7 @@ gulp.task('images', function() {
 	gulp.src(config.paths.images)
 		.pipe(gulp.dest(config.paths.dist + '/images'))
 		.pipe(connect.reload());
-})
+});
 
 gulp.task('lint', function() {
 	return gulp.src(config.paths.js)

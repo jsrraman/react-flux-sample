@@ -21,7 +21,8 @@ var ManageAuthorPage = React.createClass({
         //    }
         //},
 
-        // This gets invoked when we transit from this page to another page
+        // This gets invoked when we transit from this page to another page and the trigger to
+        // the transition is not save button
         // (Tip: use this for "Do you want to save?" kind of alerts)
         willTransitionFrom: function(transition, component) {
             if (component.state.dirty) {
@@ -59,7 +60,7 @@ var ManageAuthorPage = React.createClass({
 
         this.state.author[field] = value;
 
-        this.setState({dirty:true});
+        this.setState({dirty: true});
 
         return this.setState({author: this.state.author});
     },
@@ -95,7 +96,7 @@ var ManageAuthorPage = React.createClass({
 
         AuthorActions.createAuthor(this.state.author);
 
-        this.setState({dirty:false});
+        this.setState({dirty: false});
 
         toastr.success('Author data saved');
 
@@ -104,15 +105,15 @@ var ManageAuthorPage = React.createClass({
     },
 
     render: function() {
-		return (
-			<div>
-				<AuthorForm author={this.state.author}
+        return (
+            <div>
+                <AuthorForm author={this.state.author}
                             onChange={this.setAuthorState}
                             onSave={this.saveAuthor}
                             errors={this.state.errors}/>
-			</div>
-			);
-	}
+            </div>
+        );
+    }
 });
 
 module.exports = ManageAuthorPage;

@@ -15,7 +15,7 @@ var AuthorPage = React.createClass({
 
 	componentDidMount: function() {
 		if (this.isMounted()) {
-			this.setState({authors: AuthorApi.getAllAuthors() });
+			this.setState({authors: AuthorApi.getAllAuthors()});
 		}
 	},
 

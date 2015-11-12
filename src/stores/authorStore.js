@@ -4,6 +4,8 @@ var Dispatcher = require('../appDispatcher');
 var ActionTypes = require('../constants/actionTypes');
 var EventEmitter = require('events').EventEmitter; // For broadcasting a given event
 var assign = require('object-assign');
+var _ = require('lodash');
+
 var CHANGE_EVENT = 'change';
 
 var _authors = [];
