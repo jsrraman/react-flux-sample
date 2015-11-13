@@ -27,12 +27,12 @@ var AuthorList = React.createClass({
 				</tr>
 			);
 		};
-		
+
 		return (
 			<div>
 				<table className="table">
 					<thead>
-					    <th>Delete</th>
+					    <th/>
 						<th>ID</th>
 						<th>Name</th>
 					</thead>

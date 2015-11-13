@@ -14,7 +14,7 @@ var AuthorForm = React.createClass({
     render: function () {
         return (
             <form>
-                <h1> Manage Author</h1>
+                <h1>Manage Course</h1>
                 <Input
                     name="firstName"
                     label="First Name"

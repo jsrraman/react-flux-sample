@@ -49,26 +49,26 @@ Dispatcher.register(function (action) {
             break;
         }
 
-        case ActionTypes.CREATE_AUTHOR:
+        case ActionTypes.CREATE_COURSE:
         {
-            _authors.push(action.author);
+            _courses.push(action.course);
             CourseStore.emitChange();
             break;
         }
 
-        case ActionTypes.UPDATE_AUTHOR:
+        case ActionTypes.UPDATE_COURSE:
         {
-            var existingAuthor = _.find(_authors, {id: action.author.id});
-            var existingAuthorIndex = _.indexOf(_authors, existingAuthor);
+            var existingCourse = _.find(_courses, {id: action.course.id});
+            var existingCourseIndex = _.indexOf(_courses, existingCourse);
 
-            _authors.splice(existingAuthorIndex, 1, action.author);
+            _courses.splice(existingCourseIndex, 1, action.course);
             CourseStore.emitChange();
             break;
         }
 
-        case ActionTypes.DELETE_AUTHOR:
+        case ActionTypes.DELETE_COURSE:
         {
-            _.remove(_authors, {id: action.id});
+            _.remove(_courses, {id: action.id});
             CourseStore.emitChange();
             break;
         }

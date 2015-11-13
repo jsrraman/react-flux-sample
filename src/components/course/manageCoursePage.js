@@ -24,7 +24,7 @@ var ManageCoursePage = React.createClass({
         // This gets invoked when we transit from this page to another page and the trigger to
         // the transition is not save button
         // (Tip: use this for "Do you want to save?" kind of alerts)
-        willTransitionFrom: function(transition, component) {
+        willTransitionFrom: function (transition, component) {
             if (component.state.dirty) {
                 if (!confirm('Are you sure you want to leave without saving the changes?')) {
                     transition.abort();
@@ -37,47 +37,61 @@ var ManageCoursePage = React.createClass({
         Router.Navigation
     ],
 
-    getInitialState: function() {
+    getInitialState: function () {
         return {
-            course: {id: '', firstName: '', lastName: ''},
+            course: {title: '', author: {id: '', name: ''}, category: '', length: ''},
             errors: {},
             dirty: false
         };
     },
 
     // Calling the setState in this component life cycle method will not cause a render
-    componentWillMount: function() {
-        var courseId = this.props.params.id; // from the path '/author:id'
+    componentWillMount: function () {
+        var courseId = this.props.params.id; // from the path '/course:id'
 
         if (courseId) {
             this.setState({course: CourseStore.getCourseById(courseId)});
         }
     },
 
-    setAuthorState: function(event) {
+    setCourseState: function (event) {
         var field = event.target.name;
         var value = event.target.value;
 
-        this.state.course[field] = value;
+        if (field == 'author') {
+            this.state.course.author.name = value;
+        } else {
+            this.state.course[field] = value;
+        }
 
         this.setState({dirty: true});
 
         return this.setState({course: this.state.course});
     },
 
-    isAuthorDataValid: function () {
+    isCourseDataValid: function () {
         var isValid = true;
 
         // Clear the previous errors, if any
         this.state.errors = {};
 
-        if (this.state.author.firstName.length < 3) {
-            this.state.errors.firstName = 'First name should be at least 3 characters';
+        if (this.state.course.title.length < 5) {
+            this.state.errors.title = 'Title should be at least 5 characters';
             isValid = false;
         }
 
-        if (this.state.author.lastName.length < 3) {
-            this.state.errors.lastName = 'Last name should be at least 3 characters';
+        if (this.state.course.author.name.length < 5) {
+            this.state.errors.authorName = 'Author name should be at least 5 characters';
+            isValid = false;
+        }
+
+        if (this.state.course.category.length < 5) {
+            this.state.errors.category = 'Category should be at least 5 characters';
+            isValid = false;
+        }
+
+        if (this.state.course.length.length < 4) {
+            this.state.errors.length = 'Length should be at least 4 characters';
             isValid = false;
         }
 
@@ -86,34 +100,34 @@ var ManageCoursePage = React.createClass({
         return isValid;
     },
 
-    saveAuthor: function(event) {
+    saveCourse: function (event) {
         // Prevent the default the submit behaviour of the form
         event.preventDefault();
 
-        if (!this.isAuthorDataValid()) {
+        if (!this.isCourseDataValid()) {
             return;
         }
 
-        if (this.state.author.id) {
-            CourseActions.updateCourse(this.state.author);
+        if (this.state.course.id) {
+            CourseActions.updateCourse(this.state.course);
         } else {
-            CourseActions.createCourse(this.state.author);
+            CourseActions.createCourse(this.state.course);
         }
 
         this.setState({dirty: false});
 
-        toastr.success('Author data saved');
+        toastr.success('Course data saved');
 
         // Use mixin to programmatically redirect to other pages
-        this.transitionTo('authors');
+        this.transitionTo('courses');
     },
 
-    render: function() {
+    render: function () {
         return (
             <div>
-                <CourseForm author={this.state.author}
-                            onChange={this.setAuthorState}
-                            onSave={this.saveAuthor}
+                <CourseForm course={this.state.course}
+                            onChange={this.setCourseState}
+                            onSave={this.saveCourse}
                             errors={this.state.errors}/>
             </div>
         );

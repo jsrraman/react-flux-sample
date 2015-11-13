@@ -5,7 +5,7 @@ var AuthorApi = require('../api/AuthorApi');
 var ActionTypes = require('../constants/actionTypes');
 
 var AuthorActions = {
-    createAuthor: function(author) {
+    createAuthor: function (author) {
         var newAuthor = AuthorApi.saveAuthor(author);
 
         // This will dispatch an author created event/action to all the stores
@@ -15,7 +15,7 @@ var AuthorActions = {
         });
     },
 
-    updateAuthor: function(author) {
+    updateAuthor: function (author) {
         var updatedAuthor = AuthorApi.saveAuthor(author);
 
         Dispatcher.dispatch({
@@ -24,7 +24,7 @@ var AuthorActions = {
         });
     },
 
-    deleteAuthor: function(authorId) {
+    deleteAuthor: function (authorId) {
         AuthorApi.deleteAuthor(authorId);
 
         Dispatcher.dispatch({
