@@ -4,27 +4,25 @@ var React = require("react");
 var Router = require("react-router");
 var Link = Router.Link;
 var CourseList = require("./courseList");
-//var AuthorStore = require("../../stores/authorStore");
+var CourseStore = require("../../stores/courseStore");
 
 var CoursePage = React.createClass({
     getInitialState: function () {
         return {
-            //authors: AuthorStore.getAllAuthors()
-            courses: []
-        };
+            courses: CourseStore.getAllCourses()
+        }
     },
 
     componentWillMount: function () {
-        //AuthorStore.addChangeListener(this._onChange)
+        CourseStore.addChangeListener(this._onChange)
     },
 
     componentWillUnmount: function () {
-        //AuthorStore.removeChangeListener(this._onChange)
+        CourseStore.removeChangeListener(this._onChange)
     },
 
     _onChange: function () {
-        //this.setState({courses: AuthorStore.getAllAuthors()});
-        this.setState({courses: []});
+        this.setState({courses: CourseStore.getAllCourses()});
     },
 
     render: function () {

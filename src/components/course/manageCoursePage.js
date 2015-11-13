@@ -3,14 +3,14 @@
 var React = require("react");
 var Router = require("react-router");
 var CourseForm = require("./courseForm");
-//var AuthorActions = require("../../actions/AuthorActions");
-//var AuthorStore = require("../../stores/AuthorStore");
+var CourseActions = require("../../actions/CourseActions");
+var CourseStore = require("../../stores/CourseStore");
 var toastr = require("toastr");
 
 // Note:
 // All the state handling should be done at the parent component
 // All the markup should be dedicated to child component
-var ManageAuthorPage = React.createClass({
+var ManageCoursePage = React.createClass({
     statics: {
         //// This gets invoked when this page is transitioned in from another page
         //willTransitionTo: function(transition, params, callback) {
@@ -39,7 +39,7 @@ var ManageAuthorPage = React.createClass({
 
     getInitialState: function() {
         return {
-            author: {id: '', firstName: '', lastName: ''},
+            course: {id: '', firstName: '', lastName: ''},
             errors: {},
             dirty: false
         };
@@ -47,10 +47,10 @@ var ManageAuthorPage = React.createClass({
 
     // Calling the setState in this component life cycle method will not cause a render
     componentWillMount: function() {
-        var authorId = this.props.params.id; // from the path '/author:id'
+        var courseId = this.props.params.id; // from the path '/author:id'
 
-        if (authorId) {
-            this.setState({author: AuthorStore.getAuthorById(authorId)});
+        if (courseId) {
+            this.setState({course: CourseStore.getCourseById(courseId)});
         }
     },
 
@@ -58,11 +58,11 @@ var ManageAuthorPage = React.createClass({
         var field = event.target.name;
         var value = event.target.value;
 
-        this.state.author[field] = value;
+        this.state.course[field] = value;
 
         this.setState({dirty: true});
 
-        return this.setState({author: this.state.author});
+        return this.setState({course: this.state.course});
     },
 
     isAuthorDataValid: function () {
@@ -95,9 +95,9 @@ var ManageAuthorPage = React.createClass({
         }
 
         if (this.state.author.id) {
-            AuthorActions.updateAuthor(this.state.author);
+            CourseActions.updateCourse(this.state.author);
         } else {
-            AuthorActions.createAuthor(this.state.author);
+            CourseActions.createCourse(this.state.author);
         }
 
         this.setState({dirty: false});
@@ -120,4 +120,4 @@ var ManageAuthorPage = React.createClass({
     }
 });
 
-module.exports = ManageAuthorPage;
+module.exports = ManageCoursePage;
