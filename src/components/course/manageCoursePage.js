@@ -80,11 +80,6 @@ var ManageCoursePage = React.createClass({
             isValid = false;
         }
 
-        if (this.state.course.author.name.length < 5) {
-            this.state.errors.authorName = 'Author name should be at least 5 characters';
-            isValid = false;
-        }
-
         if (this.state.course.category.length < 5) {
             this.state.errors.category = 'Category should be at least 5 characters';
             isValid = false;

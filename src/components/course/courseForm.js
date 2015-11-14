@@ -13,21 +13,6 @@ var CourseForm = React.createClass({
         error: React.PropTypes.object
     },
 
-    //getDefaultProps: function () {
-    //    return {
-    //        options: [
-    //            {
-    //                name: 'Name1',
-    //                value: 'Value1'
-    //            },
-    //            {
-    //                name: 'Name2',
-    //                value: 'Value2'
-    //            }
-    //        ]
-    //    };
-    //},
-
     getInitialState: function () {
         return {
             authors: AuthorStore.getAllAuthors()
@@ -48,6 +33,7 @@ var CourseForm = React.createClass({
                 <SelectInput
                     name="author"
                     label="Author"
+                    onChange={this.props.onChange}
                     authors={this.state.authors}/>
 
                 <TextInput

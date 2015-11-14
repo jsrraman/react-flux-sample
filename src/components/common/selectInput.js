@@ -8,7 +8,7 @@ var SelectInput = React.createClass({
         label: React.PropTypes.string.isRequired,
         authors: React.PropTypes.array.isRequired,
         value: React.PropTypes.string,
-        error: React.PropTypes.string
+        onChange: React.PropTypes.func.isRequired
     },
 
     getInitialState: function () {
@@ -45,7 +45,8 @@ var SelectInput = React.createClass({
                     <select
                         name={this.props.name}
                         className="form-control"
-                        ref={this.props.name}>
+                        ref={this.props.name}
+                        onChange={this.props.onChange}>
                         {this.state.options}
                     </select>
                 </div>
