@@ -1,7 +1,9 @@
 "use strict";
 
 var React = require('react');
-var Input = require('../common/textInput');
+var TextInput = require('../common/textInput');
+var SelectInput = require('../common/selectInput');
+var AuthorStore = require('../../api/authorApi');
 
 var CourseForm = React.createClass({
     propTypes: {
@@ -11,38 +13,56 @@ var CourseForm = React.createClass({
         error: React.PropTypes.object
     },
 
+    //getDefaultProps: function () {
+    //    return {
+    //        options: [
+    //            {
+    //                name: 'Name1',
+    //                value: 'Value1'
+    //            },
+    //            {
+    //                name: 'Name2',
+    //                value: 'Value2'
+    //            }
+    //        ]
+    //    };
+    //},
+
+    getInitialState: function () {
+        return {
+            authors: AuthorStore.getAllAuthors()
+        }
+    },
+
     render: function () {
         return (
             <form>
                 <h1>Manage Course</h1>
-                <Input
+                <TextInput
                     name="title"
                     label="Title"
                     value={this.props.course.title}
                     onChange={this.props.onChange}
                     error={this.props.errors.title}/>
 
-                <Input
+                <SelectInput
                     name="author"
                     label="Author"
-                    value={this.props.course.author.name}
-                    onChange={this.props.onChange}
-                    error={this.props.errors.authorName}/>
+                    authors={this.state.authors}/>
 
-                <Input
+                <TextInput
                     name="category"
                     label="Category"
                     value={this.props.course.category}
                     onChange={this.props.onChange}
                     error={this.props.errors.category}/>
 
-                <Input
+                <TextInput
                     name="length"
                     label="Length"
                     value={this.props.course.length}
                     onChange={this.props.onChange}
                     error={this.props.errors.length}/>
-
 
                 <input type="submit" value="save" className="btn btn-default" onClick={this.props.onSave}/>
             </form>
