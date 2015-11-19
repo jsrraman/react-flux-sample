@@ -13,7 +13,7 @@ var sass = require('gulp-sass'); // Converts sass to css
 
 var config = {
 	devBaseUrl: 'http://localhost',
-	port: 3000,
+	port: 3001,
 	paths: {
 		html: './src/*.html',
 		js: './src/**/*.js',
